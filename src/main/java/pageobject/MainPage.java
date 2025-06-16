@@ -23,17 +23,10 @@ public class MainPage {
     private final By bunsTab = By.xpath("//div[contains(@class, 'tab_tab__1SPyG')][1]"); // Первый таб
     private final By saucesTab = By.xpath("//div[contains(@class, 'tab_tab__1SPyG')][2]"); // Второй таб
     private final By fillingsTab = By.xpath("//div[contains(@class, 'tab_tab__1SPyG')][3]"); // Третий таб
-
-    private final By bunsHeader = By.xpath("//h2[text()='Булки']");
-    private final By saucesHeader = By.xpath("//h2[text()='Соусы']");
-    private final By fillingsHeader = By.xpath("//h2[text()='Начинки']");
-
-    private final By bunsIngredient = By.xpath("//h2[text()='Булки']/following-sibling::ul//a[contains(@class, 'BurgerIngredient_ingredient__1TVf6')]");
-    private final By saucesIngredient = By.xpath("//h2[text()='Соусы']/following-sibling::ul//a[contains(@class, 'BurgerIngredient_ingredient__1TVf6')]");
-    private final By fillingsIngredient = By.xpath("//h2[text()='Начинки']/following-sibling::ul//a[contains(@class, 'BurgerIngredient_ingredient__1TVf6')]");
+    private By activeTab = By.xpath(".//div[contains(@class,'current')]/span");
     public MainPage(WebDriver driver) {
         this.driver = driver;
-        this.wait= new WebDriverWait(driver, Duration.ofSeconds(10));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Step("Ожидание видимости кнопки 'Конструктор'")
@@ -73,11 +66,6 @@ public class MainPage {
         driver.findElement(bunsTab).click();
     }
 
-    @Step("Ожидание видимости кнопки Булки")
-    public WebElement waitForBunsTab() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(bunsTab));
-    }
-
     @Step("Ожидание видимости кнопки Соусы")
     public WebElement waitForSaucesTab() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(saucesTab));
@@ -99,95 +87,9 @@ public class MainPage {
     }
 
 
-
-
-
-
-    @Step("Ожидание видимости заголовка 'Булки'")
-    public WebElement waitForBunsHeader() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(bunsHeader));
-    }
-
-    @Step("Проверка текста заголовка 'Булки'")
-    public boolean isBunsHeaderDisplayed() {
-        WebElement fillingsHeader = waitForBunsHeader();
-        return fillingsHeader.getText().equals("Булки");
-    }
-
-    @Step("Ожидание видимости заголовка 'Соусы'")
-    public WebElement waitForSaucesHeader() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(saucesHeader));
-    }
-
-    @Step("Проверка текста заголовка 'Соусы'")
-    public boolean isSaucesHeaderDisplayed() {
-        WebElement fillingsHeader = waitForSaucesHeader();
-        return fillingsHeader.getText().equals("Соусы");
-    }
-
-
-    @Step("Ожидание видимости заголовка 'Начинки'")
-    public WebElement waitForFillingsHeader() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(fillingsHeader));
-    }
-
-    @Step("Проверка текста заголовка 'Начинки'")
-    public boolean isFillingsHeaderDisplayed() {
-        WebElement fillingsHeader = waitForFillingsHeader();
-        return fillingsHeader.getText().equals("Начинки");
-    }
-
-
-
-
-    @Step("Ожидание видимости ингредиента 'Булки'")
-    public WebElement waitForBunsIngredient() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(bunsIngredient));
-    }
-    @Step("Проверка отображения ингредиента 'Булки'")
-    public boolean isBunsIngredientDisplayed() {
-        return waitForBunsIngredient().isDisplayed();
-    }
-
-    @Step("Ожидание видимости ингредиента 'Соусы'")
-    public WebElement waitForSaucesIngredient() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(saucesIngredient));
-    }
-    @Step("Проверка отображения ингредиента 'Соусы'")
-    public boolean isSaucesIngredientDisplayed() {
-        return waitForSaucesIngredient().isDisplayed();
-    }
-
-    @Step("Ожидание видимости ингредиента 'Начинки'")
-    public WebElement waitForFillingsIngredient() {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(fillingsIngredient));
-    }
-    @Step("Проверка отображения ингредиента 'Начинки'")
-    public boolean isFillingsIngredientDisplayed() {
-        return waitForFillingsIngredient().isDisplayed();
-    }
-
-    @Step("Прокрутка вниз до элемента")
-    public void scrollToElement(WebElement element) {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
-    }
-
-
-    @Step("Проверка, находится ли элемент в пределах viewport")
-    public boolean isElementInViewport(WebElement element) {
-
-        org.openqa.selenium.Rectangle rect = element.getRect();
-
-
-        int windowWidth = driver.manage().window().getSize().getWidth();
-        int windowHeight = driver.manage().window().getSize().getHeight();
-
-
-        boolean isInViewport = rect.getX() >= 0
-                && rect.getY() >= 0
-                && rect.getX() + rect.getWidth() <= windowWidth
-                && rect.getY() + rect.getHeight() <= windowHeight;
-
-        return isInViewport;
+    @Step("Получение текста активной вкладки")
+    public String getTabText() throws InterruptedException {
+        Thread.sleep(1500);
+        return driver.findElement(activeTab).getText();
     }
 }

@@ -30,7 +30,7 @@ public class UserRegistrationTest {
     public void testSuccessfulRegistration() {
         registerPage.clickLKButton();
         registerPage.clickRegisterLink();
-        registerPage.enterRegistrationInfo("Иван", "ivan34567891@example.com", "123456");
+        registerPage.enterRegistrationInfo("Иван", "ivan34567891@example.com", "Qwer1234)");
         registerPage.clickRegisterButton();
         registerPage.waitForEnterTitle();
         Assert.assertTrue(registerPage.checkEnterTitleIsDisplayed());
@@ -52,7 +52,7 @@ public class UserRegistrationTest {
     @After
     public void tearDown() {
 
-        Credentials credentials = new Credentials("ivan34567891@example.com", "123456");
+        Credentials credentials = new Credentials("ivan34567891@example.com", "Qwer1234)");
         accessToken = stellarBurgerClient.loginUser(credentials)
                 .extract()
                 .path("accessToken");

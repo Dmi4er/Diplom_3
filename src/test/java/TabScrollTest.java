@@ -11,10 +11,9 @@ import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TabScrollTest {
-    private static final Logger logger = LoggerFactory.getLogger(TabScrollTest.class);
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -32,55 +31,25 @@ public class TabScrollTest {
     }
 
     @Test
-    public void testBunsSectionVisibility() {
-
+    public void testBunsSectionVisibility() throws InterruptedException {
+        mainPage.waitForSaucesTab();
         mainPage.clickSaucesTab();
-        mainPage.waitForBunsTab();
         mainPage.clickBunsTab();
-        mainPage.waitForBunsHeader();
-        assertTrue(mainPage.isBunsHeaderDisplayed());
-
-
-        mainPage.waitForBunsIngredient();
-        assertTrue(mainPage.isBunsIngredientDisplayed());
-
-        assertTrue(mainPage.isElementInViewport(mainPage.waitForBunsIngredient()));
+        assertEquals("Не сработал переход к разделу Булки", "Булки", mainPage.getTabText());
     }
 
     @Test
-    public void testSaucesSectionVisibility() {
-
-        mainPage.waitForFillingsTab();
-        mainPage.clickFillingsTab();
+    public void testSaucesSectionVisibility() throws InterruptedException {
         mainPage.waitForSaucesTab();
         mainPage.clickSaucesTab();
-        mainPage.waitForSaucesHeader();
-        assertTrue(mainPage.isSaucesHeaderDisplayed());
-
-        mainPage.waitForSaucesIngredient();
-        assertTrue(mainPage.isSaucesIngredientDisplayed());
-
-        assertTrue(mainPage.isElementInViewport(mainPage.waitForSaucesIngredient()));
+        assertEquals("Не сработал переход к разделу Соусы", "Соусы", mainPage.getTabText());
     }
 
     @Test
-    public void testFillingsSectionVisibility() {
-
-        mainPage.waitForSaucesTab();
-        mainPage.clickSaucesTab();
+    public void testFillingsSectionVisibility() throws InterruptedException {
         mainPage.waitForFillingsTab();
         mainPage.clickFillingsTab();
-
-
-        mainPage.waitForFillingsHeader();
-        mainPage.isFillingsHeaderDisplayed();
-
-        mainPage.waitForFillingsIngredient();
-        assertTrue(mainPage.isFillingsIngredientDisplayed());
-
-        mainPage.scrollToElement(mainPage.waitForFillingsIngredient());
-
-        assertTrue(mainPage.isElementInViewport(mainPage.waitForFillingsIngredient()));
+        assertEquals("Не сработал переход к разделу Начинки", "Начинки", mainPage.getTabText());
     }
 
     @After

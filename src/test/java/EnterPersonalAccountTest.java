@@ -10,10 +10,8 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobject.AuthorizationPage;
-import pageobject.RegisterPage;
 import pageobject.PersonalAccountPage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import pageobject.RegisterPage;
 
 import java.time.Duration;
 

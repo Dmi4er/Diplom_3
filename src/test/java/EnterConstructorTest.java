@@ -8,18 +8,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobject.AuthorizationPage;
-import pageobject.RegisterPage;
 import pageobject.MainPage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import pageobject.RegisterPage;
 
 import java.time.Duration;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class EnterConstructorTest {

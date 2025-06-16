@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageobject.AuthorizationPage;
 import pageobject.PersonalAccountPage;
 import pageobject.RegisterPage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
 
